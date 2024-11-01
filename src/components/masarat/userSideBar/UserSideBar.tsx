@@ -6,7 +6,7 @@ export default function UserSideBar() {
   return (
     <>
       <div className=''>
-        <div className='h-screen p-4 overflow-scroll  '>
+        <div className='h-screen p-4   '>
           <UserInfo />
           <Subjects />
         </div>

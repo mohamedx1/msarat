@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import style from "./chat.module.css";
 import BootChatAvatat from "../../../common/bootChatAvatar/BootChatAvatat";
+import Mainbutn from "../../../common/buttons/Mainbutn";
+import { ArrowUp } from "lucide-react";
+
 interface Message {
   id: number;
   text: string;
@@ -99,12 +102,10 @@ export default function ChatComponent() {
             placeholder='Type your message...'
             className='flex-1 px-4 py-2 text-sm focus:outline-none'
           />
-          <button
-            type='submit'
-            className='bg-blue-500 text-white px-4 py-2 text-sm font-medium hover:bg-blue-600 transition-colors'
-          >
-            Send
-          </button>
+
+          <Mainbutn>
+            <ArrowUp />
+          </Mainbutn>
         </div>
       </form>
     </div>
