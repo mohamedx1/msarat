@@ -1,7 +1,7 @@
 import Lessons from "../lessonsNavLinks/Lessons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { getSubjects } from "../../../../store/subjects/subjectsSlice";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { RingLoader } from "react-spinners";
 import { getLessons } from "../../../../store/lessons/lesssonsSlice";
 import { LockKeyhole } from "lucide-react";
@@ -18,6 +18,49 @@ export default function Subjects() {
     dispatch(getLessons());
   }, [dispatch]);
 
+  const Allsubjects =
+    subjects.length > 0 ? (
+      subjects.map((sub) => (
+        <React.Fragment key={sub.id}>
+          {sub.is_active === true ? (
+            <div className='mt-2.5'>
+              <p className='text-gray-500'>{sub.name}</p>
+              <div className='w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700'>
+                <div
+                  className='bg-primary-300 h-2 rounded-full mt-1'
+                  style={{ width: `${sub.progress}%` }}
+                ></div>
+              </div>
+
+              {lessons.length > 0
+                ? lessons.map((less, idx) => (
+                    <React.Fragment key={idx}>
+                      {less.subject === sub.id ? (
+                        <div>
+                          <Lessons {...less} />
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </React.Fragment>
+                  ))
+                : "لا يوجد مواد لعرضها"}
+            </div>
+          ) : (
+            <p className='text-backgroundGray'>{sub.name}</p>
+          )}
+        </React.Fragment>
+      ))
+    ) : (
+      <div className='mt-10 text-center'>
+        لا يوجد دروس لعرضها{" "}
+        <span>
+          {" "}
+          <LockKeyhole />
+        </span>
+      </div>
+    );
+
   return (
     <>
       {error != null ? (
@@ -28,42 +71,7 @@ export default function Subjects() {
       ) : (
         ""
       )}
-      {isLoading === "pending" ? (
-        <RingLoader />
-      ) : subjects.length > 0 ? (
-        subjects.map((sub, idx) => (
-          <>
-            {sub.is_active === true ? (
-              <div key={idx} className='mt-2.5'>
-                <p className='text-gray-500'>{sub.name}</p>
-                <div className='w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700'>
-                  <div
-                    className='bg-primary-300 h-2 rounded-full mt-1'
-                    style={{ width: `${sub.progress}%` }}
-                  ></div>
-                </div>
-                {lessons.length > 0
-                  ? lessons.map((less) => (
-                      <>
-                        {less.subject === sub.id ? <Lessons {...less} /> : ""}
-                      </>
-                    ))
-                  : "لا يوجد مواد لعرضها"}
-              </div>
-            ) : (
-              <p className='text-backgroundGray'>{sub.name}</p>
-            )}
-          </>
-        ))
-      ) : (
-        <div className='mt-10 text-center'>
-          لا يوجد دروس لعرضها{" "}
-          <span>
-            {" "}
-            <LockKeyhole />
-          </span>
-        </div>
-      )}
+      {isLoading === "pending" ? <RingLoader /> : Allsubjects}
     </>
   );
 }

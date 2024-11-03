@@ -1,6 +1,7 @@
 import { createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-type respose = {id:string ,  description:string , title:string ,   status:string , subject:string , order:string  }[]
+
+type respose = { id: string, description: string, title: string, status: string, subject: string, order: string; }[]
 const getLessons = createAsyncThunk("lessons/getLessons", async (_, thunkAPI) => {
     const {rejectWithValue} =thunkAPI
     try {

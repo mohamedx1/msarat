@@ -1,99 +1,108 @@
 import React, { useState, useRef, useEffect } from "react";
 import style from "./chat.module.css";
 import BootChatAvatat from "../../../common/bootChatAvatar/BootChatAvatat";
-import Mainbutn from "../../../common/buttons/Mainbutn";
+import MainButton from "../../../common/buttons/Mainbutn";
 import { ArrowUp } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import getRestoreChat from "./../../../../store/restoreMainChatt/act/actChatting";
+import BootResponse from "./BootResponse";
 
-interface Message {
-  id: number;
-  text: string;
-  sender: "user" | "bot";
-}
+type Message = { id: string; sender_type: "system" | "user"; content: string };
 
 export default function ChatComponent() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      text: "كان وأخواتها أفعال ناسخة ناقصة تدخُلُ على الجملة الاسمية، فيُسمَّى المبتدأ اسمها ويبقى مرفوعًا، ويُسمَّى الخبرُ خبرها ويصير منصوبًا وأخوات (كان) هي (أصبح)، و(أضحى)، و(أمسى)، و(بات)، و(صار)، و(ظلَّ)، و(ليس)، و(ما دام)، و(ما بَرِحَ)، و(ما فَتِئَ)، و(ما انفكَّ)، و(ما زال، من الفعل زال يزال، وليس زال يزول).",
-      sender: "bot",
-    },
-  ]);
+  const dispatch = useAppDispatch();
+  const {
+    error,
+    messages: initialMessages,
+    isLoading,
+  } = useAppSelector((state) => state.restoreMessages);
+
+  const [allMessages, setAllMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
+  // Fetch initial chat messages
+  useEffect(() => {
+    dispatch(getRestoreChat());
+  }, [dispatch]);
+
+  // Update allMessages when initial messages change
+  useEffect(() => {
+    setAllMessages(initialMessages);
+  }, [initialMessages]);
+
+  // Scroll to bottom when messages update
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [allMessages]);
 
-  useEffect(scrollToBottom, [messages]);
-
+  // Handle sending a new message
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputMessage.trim() !== "") {
-      const newMessage: Message = {
-        id: messages.length + 1,
-        text: inputMessage,
-        sender: "user",
-      };
-      setMessages([...messages, newMessage]);
-      setInputMessage("");
 
-      // Simulate bot response
-      setTimeout(() => {
-        const botResponse: Message = {
-          id: messages.length + 2,
-          text: "تم الرد",
-          sender: "bot",
-        };
-        setMessages((prevMessages) => [...prevMessages, botResponse]);
-      }, 500);
-    }
+    if (inputMessage.trim() === "") return;
+
+    const newMessage: Message = {
+      id: (allMessages.length + 1).toString(),
+      sender_type: "user",
+      content: inputMessage,
+    };
+
+    setAllMessages([...allMessages, newMessage]);
+    setInputMessage("");
+
+    // Simulate bot response
+    setTimeout(() => {
+      const botResponse: Message = {
+        id: (allMessages.length + 2).toString(),
+        sender_type: "system",
+        content: "تم الرد",
+      };
+      setAllMessages((prevMessages) => [...prevMessages, botResponse]);
+    }, 500);
   };
 
   return (
-    <div className={`flex flex-col  rounded-lg shadow-md h-screen `}>
+    <div className={`flex flex-col rounded-lg shadow-md h-screen`}>
       <div
         className={`flex-1 overflow-y-auto p-4 space-y-4 ${style.noScrollbar} ${style.chatComponent}`}
       >
-        {messages.map((message) => (
+        {allMessages.map((msg) => (
           <div
-            key={message.id}
+            key={msg.id}
             className={`flex ${
-              message.sender === "user" ? "justify-end" : "justify-start"
+              msg.sender_type !== "system" ? "justify-end" : "justify-start"
             }`}
           >
-            {message.sender === "bot" ? (
+            {msg.sender_type === "system" ? (
               <div className='flex gap-2'>
-                <div className='bg-secondary-300 w-14 p-1  rounded-full h-12  flex items-center justify-center  '>
-                  <div className=''>
-                    <BootChatAvatat emotion={0} />
-                  </div>
+                <div className='bg-secondary-300 w-14 p-1 rounded-full h-12 flex items-center justify-center'>
+                  <BootChatAvatat emotion={0} />
                 </div>
-                <div className=' flex justify-between mt-4  w-4/5 '>
+                <div className='flex justify-between mt-4 w-4/5'>
                   <div
-                    className={`max-w-xs md:max-w-md px-4 py-2 rounded-l bg-transparent text-gray-800 m-auto"
-                    }`}
+                    className={`max-w-xs md:max-w-md px-4 py-2 rounded-l bg-transparent text-gray-800 m-auto`}
                   >
-                    {message.text}
+                    <BootResponse content={msg.content} />
                   </div>
                 </div>
               </div>
             ) : (
               <div
                 className={`max-w-xs md:max-w-md px-4 py-2 rounded-lg ${
-                  message.sender === "user"
+                  msg.sender_type === "user"
                     ? "bg-primary-300 text-white"
                     : "bg-transparent text-gray-800"
                 }`}
               >
-                {message.text}
+                {msg.content}
               </div>
             )}
           </div>
         ))}
         <div ref={messagesEndRef} />
       </div>
-      <form onSubmit={handleSendMessage} className='p-4 bg-white border-t'>
+      <form className='p-4 bg-white border-t' onSubmit={handleSendMessage}>
         <div className='flex rounded-lg border border-gray-300 overflow-hidden'>
           <input
             type='text'
@@ -102,10 +111,9 @@ export default function ChatComponent() {
             placeholder='Type your message...'
             className='flex-1 px-4 py-2 text-sm focus:outline-none'
           />
-
-          <Mainbutn>
+          <MainButton>
             <ArrowUp />
-          </Mainbutn>
+          </MainButton>
         </div>
       </form>
     </div>
