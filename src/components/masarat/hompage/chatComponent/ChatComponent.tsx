@@ -6,7 +6,7 @@ import { ArrowUp } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import BootResponse from "./BootResponse";
 import getRestoreChat from "./../../../../store/restoreMainChatt/act/actChatting";
-import getToken from "./../../../../store/login/act/actLogin";
+
 
 type Message = { id: string; sender_type: "system" | "user"; content: string };
 
@@ -18,9 +18,9 @@ export default function ChatComponent() {
     isLoading,
   } = useAppSelector((state) => state.restoreMessages);
 
-  useEffect(() => {
-    dispatch(getToken());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getToken());
+  // }, []);
   const { token } = useAppSelector((state) => state.login);
 
   const [allMessages, setAllMessages] = useState<Message[]>([]);
@@ -30,7 +30,7 @@ export default function ChatComponent() {
   // Fetch initial chat messages
   useEffect(() => {
     dispatch(getRestoreChat(token));
-  }, [dispatch]);
+  }, [token]);
 
   // Update allMessages when initial messages change
   useEffect(() => {

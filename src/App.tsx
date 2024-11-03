@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import MainLayout from "./layouts/AppLayout/MainLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -6,7 +6,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/masarat/hompage/Home";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import getToken from "./store/login/act/actLogin";
+import { useAppDispatch } from "./store/hooks";
+
 function App() {
+  
   const mainRouter = createBrowserRouter([
     {
       path: "/",

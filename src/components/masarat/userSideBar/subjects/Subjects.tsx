@@ -3,9 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { getSubjects } from "../../../../store/subjects/subjectsSlice";
 import React, { useEffect } from "react";
 import { RingLoader } from "react-spinners";
-import { getLessons } from "../../../../store/lessons/lesssonsSlice";
 import { LockKeyhole } from "lucide-react";
-// import getToken from "../../../../store/login/act/actLogin";
 
 export default function Subjects() {
   const dispatch = useAppDispatch();
@@ -18,8 +16,7 @@ export default function Subjects() {
 
   useEffect(() => {
     dispatch(getSubjects(token));
-    dispatch(getLessons());
-  }, [dispatch]);
+  }, [token]);
 
   const Allsubjects =
     subjects.length > 0 ? (
