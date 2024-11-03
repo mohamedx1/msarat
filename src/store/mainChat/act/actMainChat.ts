@@ -217,7 +217,7 @@ const userResponse =  {
 }
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNTg1ODkzLCJpYXQiOjE3MzA1NTU4OTMsImp0aSI6ImRmMTQ1NmNiMjMxMTRhOTFhMDBmMGM1ZGY0OTY4YzZjIiwidXNlcl9pZCI6Mn0.cpW-Xaz6ZjYf6nqQ_LYPdeJnjGll8ZGh4J7qVEgCI_E";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNjY3NzE0LCJpYXQiOjE3MzA2Mzc3MTQsImp0aSI6ImJhMDg2MDMzZjMwYjQ3NTdhNWIxY2E3OWMxZDg0Njk0IiwidXNlcl9pZCI6Mn0.fYZeQIR6ugWKyzHPW8chSQjdLA9FMTtqSnNZC5pYmNc";
 
 
 const getMainChat = createAsyncThunk("mainChat/getMainChat", async (_, thunkAPI) => {

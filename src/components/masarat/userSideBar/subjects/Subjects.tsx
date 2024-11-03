@@ -5,16 +5,19 @@ import React, { useEffect } from "react";
 import { RingLoader } from "react-spinners";
 import { getLessons } from "../../../../store/lessons/lesssonsSlice";
 import { LockKeyhole } from "lucide-react";
+// import getToken from "../../../../store/login/act/actLogin";
 
 export default function Subjects() {
   const dispatch = useAppDispatch();
   const { isLoading, subjects, error } = useAppSelector(
     (state) => state.subjects
   );
+
   const { lessons } = useAppSelector((state) => state.lessons);
+  const { token } = useAppSelector((state) => state.login);
 
   useEffect(() => {
-    dispatch(getSubjects());
+    dispatch(getSubjects(token));
     dispatch(getLessons());
   }, [dispatch]);
 

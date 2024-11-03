@@ -67,10 +67,10 @@ interface BootResponse {
 
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNjE2MjgwLCJpYXQiOjE3MzA1ODYyODAsImp0aSI6IjhiNDdmMTJjZGUyOTRiMWRhNWE5YTQ3YjQ5MDAzNTM5IiwidXNlcl9pZCI6Mn0.s2GNNfyBnI7fzALO56degfHKh5yw2ioW8a6kS3goQfM";
+// const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMwNjY3NzE0LCJpYXQiOjE3MzA2Mzc3MTQsImp0aSI6ImJhMDg2MDMzZjMwYjQ3NTdhNWIxY2E3OWMxZDg0Njk0IiwidXNlcl9pZCI6Mn0.fYZeQIR6ugWKyzHPW8chSQjdLA9FMTtqSnNZC5pYmNc";
 
 
-const getRestoreChat = createAsyncThunk("restoreMainChat/getRestoreChat", async (_, thunkAPI) => {
+const getRestoreChat = createAsyncThunk("restoreMainChat/getRestoreChat", async (token:string,thunkAPI) => {
     const {rejectWithValue} =thunkAPI
     try {
         const response = await axios.get<BootResponse>("http://127.0.0.1:8000/chats/retrieve-messages/?lesson_id=20ecc322-fbb4-46ca-abcf-edcfcb34d42f" ,{headers:{

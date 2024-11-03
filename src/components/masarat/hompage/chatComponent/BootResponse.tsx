@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAppSelector } from "../../../../store/hooks";
 
 interface Content {
   id: string;
@@ -35,7 +36,8 @@ interface MultipleChoiceQuestion {
 interface Choice {
   [key: string]: string;
 }
-export default function BootResponse({ content }: { content: any }) {
+export default function BootResponse({ content }: { content: any; }) {
+  
   const jsonString = content
     .replace(/'/g, '"') // Convert single quotes to double quotes
     .replace(/\bNone\b/g, "null") // Replace None with null

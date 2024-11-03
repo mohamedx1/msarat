@@ -4,8 +4,9 @@ import BootChatAvatat from "../../../common/bootChatAvatar/BootChatAvatat";
 import MainButton from "../../../common/buttons/Mainbutn";
 import { ArrowUp } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import getRestoreChat from "./../../../../store/restoreMainChatt/act/actChatting";
 import BootResponse from "./BootResponse";
+import getRestoreChat from "./../../../../store/restoreMainChatt/act/actChatting";
+import getToken from "./../../../../store/login/act/actLogin";
 
 type Message = { id: string; sender_type: "system" | "user"; content: string };
 
@@ -17,13 +18,18 @@ export default function ChatComponent() {
     isLoading,
   } = useAppSelector((state) => state.restoreMessages);
 
+  useEffect(() => {
+    dispatch(getToken());
+  }, []);
+  const { token } = useAppSelector((state) => state.login);
+
   const [allMessages, setAllMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Fetch initial chat messages
   useEffect(() => {
-    dispatch(getRestoreChat());
+    dispatch(getRestoreChat(token));
   }, [dispatch]);
 
   // Update allMessages when initial messages change
