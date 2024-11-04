@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import BootResponse from "./BootResponse";
 import getRestoreChat from "./../../../../store/restoreMainChatt/act/actChatting";
 
-
 type Message = { id: string; sender_type: "system" | "user"; content: string };
 
 export default function ChatComponent() {
@@ -62,7 +61,8 @@ export default function ChatComponent() {
       const botResponse: Message = {
         id: (allMessages.length + 2).toString(),
         sender_type: "system",
-        content: "تم الرد",
+        content:
+          "كان وأخواتها أفعال ناسخة ناقصة تدخُلُ على الجملة الاسمية، فيُسمَّى المبتدأ اسمها ويبقى مرفوعًا، ويُسمَّى الخبرُ خبرها ويصير منصوبًا وأخوات (كان) هي (أصبح)، و(أضحى)، و(أمسى)، و(بات)، و(صار)، و(ظلَّ)، و(ليس)، و(ما دام)، و(ما بَرِحَ)، و(ما فَتِئَ)، و(ما انفكَّ)، و(ما زال، من الفعل زال يزال، وليس زال يزول).",
       };
       setAllMessages((prevMessages) => [...prevMessages, botResponse]);
     }, 500);
@@ -108,16 +108,25 @@ export default function ChatComponent() {
         ))}
         <div ref={messagesEndRef} />
       </div>
-      <form className='p-4 bg-white border-t' onSubmit={handleSendMessage}>
-        <div className='flex rounded-lg border border-gray-300 overflow-hidden'>
+      <form
+        className='p-4 m-4 rounded-2xl bg-gray-50  flex flex-col gap-4'
+        onSubmit={handleSendMessage}
+      >
+        <div>أكتب اجابتك أو سؤالك وسيقوم المساعد الآلي بالإجابة عنه ...</div>
+        <div className=' flex gap-2  rounded-lg  overflow-hidden '>
           <input
             type='text'
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            placeholder='Type your message...'
-            className='flex-1 px-4 py-2 text-sm focus:outline-none'
+            className='flex-1 rounded-md px-4 py-2 text-sm focus:outline-none'
+            placeholder='أكتب اجابتك أو سؤالك وسيقوم المساعد الآلي بالإجابة عنه...'
           />
-          <MainButton>
+          <MainButton
+            pading={"p-2"}
+            bg={"bg-primary-300"}
+            hvr={"hover:bg-primary-200"}
+            text={"text-white"}
+          >
             <ArrowUp />
           </MainButton>
         </div>

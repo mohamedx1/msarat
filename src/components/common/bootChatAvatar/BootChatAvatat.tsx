@@ -20,7 +20,7 @@ export default function BootChatAvatat({ emotion }: { emotion: Emotion }) {
 
   return (
     <span>
-      <img src={avatars[emotion]} alt='boot' />
+      <img className='w-full' src={avatars[emotion]} alt='boot' />
     </span>
   );
 }

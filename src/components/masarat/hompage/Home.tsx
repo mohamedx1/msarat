@@ -10,7 +10,7 @@ export default function HomeLayout() {
     <>
       <div>
         <PanelGroup direction='horizontal' className={homelayout}>
-          <Panel defaultSize={45} minSize={30}>
+          <Panel defaultSize={45} minSize={40}>
             <ChatComponent />
           </Panel>
           <PanelResizeHandle />
