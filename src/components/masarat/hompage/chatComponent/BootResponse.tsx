@@ -36,17 +36,16 @@ interface MultipleChoiceQuestion {
 interface Choice {
   [key: string]: string;
 }
-export default function BootResponse({ content }: { content: any; }) {
-  
-  const jsonString = content
-    .replace(/'/g, '"') // Convert single quotes to double quotes
-    .replace(/\bNone\b/g, "null") // Replace None with null
-    .replace(/\bTrue\b/g, "true") // Replace True with true
-    .replace(/\bFalse\b/g, "false"); // Replace False with false
+export default function BootResponse({ content }: { content: any }) {
+  // const jsonString = content
+  //   .replace(/'/g, '"') // Convert single quotes to double quotes
+  //   .replace(/\bNone\b/g, "null") // Replace None with null
+  //   .replace(/\bTrue\b/g, "true") // Replace True with true
+  //   .replace(/\bFalse\b/g, "false"); // Replace False with false
 
   //   console.log(JSON.parse(jsonString));
   //   const jsonData = JSON.parse(jsonString);
-  return <div>{content}</div>;
+  return <div>{content[0]}</div>;
 }
 
 // {

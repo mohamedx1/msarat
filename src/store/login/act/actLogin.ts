@@ -11,15 +11,16 @@ const loginData = JSON.stringify(data);
 const getToken = createAsyncThunk("login/getToken", async (_, thunkAPI) => {
   const { rejectWithValue } = thunkAPI;
   try {
+    console.log(loginData)
     const response = await axios.post("http://127.0.0.1:8000/users/login/", loginData, {
       headers: {
         "Content-Type": "application/json"
       }
     });
     const token = response.data.access;
-    console.log(token);
     return token;
   } catch (error) {
+    console.log(loginData)
     if (axios.isAxiosError(error)) {
       return rejectWithValue(error.message);
     } else {

@@ -71,10 +71,9 @@ interface BootResponse {
 
 
 const getRestoreChat = createAsyncThunk("restoreMainChat/getRestoreChat", async (token: string, thunkAPI) => {
+  console.log(token)
   const {rejectWithValue} =thunkAPI
   try {
-
-    console.log(`${token} this form act chat`)
         const response = await axios.get<BootResponse>("http://127.0.0.1:8000/chats/retrieve-messages/?lesson_id=20ecc322-fbb4-46ca-abcf-edcfcb34d42f" ,{headers:{
         Authorization: `Bearer ${token}`,
       },
@@ -82,7 +81,8 @@ const getRestoreChat = createAsyncThunk("restoreMainChat/getRestoreChat", async 
       const data = response.data;
         return data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
+    if (axios.isAxiosError(error)) {
+        console.log(error)
         return rejectWithValue(error.message)
         } else
             return rejectWithValue("An Unexpected Error")

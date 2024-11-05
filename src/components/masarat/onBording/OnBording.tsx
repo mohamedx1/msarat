@@ -13,7 +13,7 @@ export default function OnBording() {
 
   var settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -34,6 +34,18 @@ export default function OnBording() {
               }}
               {...settings}
             >
+              <div key={5}>
+                <h4 className='text-gray-700 text-text-lg font-semibold'>
+                  التقويم الختامي والتقرير التشخيصي
+                </h4>
+                <p className='text-gray-600 text-text-sm font-semibold my-4'>
+                  في هذه الخطوة الأخيرة، سنقوم بإجراء تقويم ختامي لقياس مدى
+                  استيعابك للمفاهيم الجديدة. بعدها، ستحصل على تقرير تشخيصي شامل
+                  يعرض مستوى تقدمك ويحدد نقاط القوة ومجالات التحسين. سيمكنك هذا
+                  التقرير من معرفة إنجازاتك بشكلٍ دقيق ويُعدُّك للخطوات التالية
+                  في مسيرتك التعليمية.
+                </p>
+              </div>
               <div key={4}>
                 <h4 className='text-gray-700 text-text-lg font-semibold'>
                   : تجربة التعلم المخصصة للشرح والتطبيق
@@ -71,23 +83,12 @@ export default function OnBording() {
                   فعالية وامتاعًا.
                 </p>
               </div>
+
               <div key={1} className='p-5'>
                 <h4 className='text-gray-700 text-text-lg font-semibold '>
                   مرحباً بك في رحلتك التعليمية التفاعلية! في هذه الرحلة سوف تمر
                   بأربعة مراحل
                 </h4>
-              </div>
-              <div key={5}>
-                <h4 className='text-gray-700 text-text-lg font-semibold'>
-                  التقويم الختامي والتقرير التشخيصي
-                </h4>
-                <p className='text-gray-600 text-text-sm font-semibold my-4'>
-                  في هذه الخطوة الأخيرة، سنقوم بإجراء تقويم ختامي لقياس مدى
-                  استيعابك للمفاهيم الجديدة. بعدها، ستحصل على تقرير تشخيصي شامل
-                  يعرض مستوى تقدمك ويحدد نقاط القوة ومجالات التحسين. سيمكنك هذا
-                  التقرير من معرفة إنجازاتك بشكلٍ دقيق ويُعدُّك للخطوات التالية
-                  في مسيرتك التعليمية.
-                </p>
               </div>
             </Slider>
             <div className='flex justify-between'>

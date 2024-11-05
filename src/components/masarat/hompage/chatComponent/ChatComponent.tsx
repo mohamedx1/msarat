@@ -28,9 +28,10 @@ export default function ChatComponent() {
 
   // Fetch initial chat messages
   useEffect(() => {
+    console.log(token);
     dispatch(getRestoreChat(token));
   }, [token]);
-
+  // dispatch(getRestoreChat(token));
   // Update allMessages when initial messages change
   useEffect(() => {
     setAllMessages(initialMessages);

@@ -18,11 +18,12 @@ export default function Subjects() {
     dispatch(getSubjects(token));
   }, [token]);
 
+  console.log(subjects);
   const Allsubjects =
     subjects.length > 0 ? (
       subjects.map((sub) => (
         <React.Fragment key={sub.id}>
-          {sub.is_active === true ? (
+          {
             <div className='mt-2.5'>
               <p className='text-gray-500'>{sub.name}</p>
               <div className='w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700'>
@@ -32,7 +33,7 @@ export default function Subjects() {
                 ></div>
               </div>
 
-              {lessons.length > 0
+              {/* {lessons.length > 0
                 ? lessons.map((less, idx) => (
                     <React.Fragment key={idx}>
                       {less.subject === sub.id ? (
@@ -44,18 +45,15 @@ export default function Subjects() {
                       )}
                     </React.Fragment>
                   ))
-                : "لا يوجد مواد لعرضها"}
+                : "لا يوجد مواد لعرضها"} */}
             </div>
-          ) : (
-            <p className='text-backgroundGray'>{sub.name}</p>
-          )}
+          }
         </React.Fragment>
       ))
     ) : (
       <div className='mt-10 text-center'>
         لا يوجد دروس لعرضها{" "}
         <span>
-          {" "}
           <LockKeyhole />
         </span>
       </div>
