@@ -3,3 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.slick-dots li button:before {
+    color:#FFD25D;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #FFB802;
+    font-size: 10px;
+}

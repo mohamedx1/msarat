@@ -8,16 +8,17 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import getToken from "./store/login/act/actLogin";
 import { useAppDispatch } from "./store/hooks";
+import OnBording from "./components/masarat/onBording/OnBording";
 
 function App() {
-  
   const mainRouter = createBrowserRouter([
+    { path: "/", element: <OnBording /> },
     {
-      path: "/",
+      path: "/msarat",
       element: <MainLayout />,
       children: [
         {
-          path: "/",
+          path: "/msarat/",
           element: <Home />,
         },
       ],
