@@ -3,6 +3,7 @@ import subjectsReducer from "./subjects/subjectsSlice";
 import lessonsSlice from './lessons/lesssonsSlice';
 import restoreMainChatSlice from './restoreMainChatt/chattingSlice';
 import loginSlice from './login/loginSlice';
+import mainChatSlice from './mainChat/mainChatSlice';
 
 
  const store = configureStore({
@@ -10,7 +11,8 @@ import loginSlice from './login/loginSlice';
     subjects: subjectsReducer,
      lessons: lessonsSlice,
      restoreMessages: restoreMainChatSlice,
-    login : loginSlice,
+     login: loginSlice,
+    chatting: mainChatSlice
   },
  });
 

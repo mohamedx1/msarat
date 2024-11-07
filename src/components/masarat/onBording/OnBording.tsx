@@ -21,7 +21,7 @@ export default function OnBording() {
     arrows: false,
   };
   return (
-    <main className='container flex justify-center items-center h-screen'>
+    <main className='container m-auto flex justify-center items-center h-screen'>
       <section className=' w-1/2  h-fit  p-6 flex flex-col gap-6  items-center '>
         <figure>
           <img src={logo} alt='logo' />

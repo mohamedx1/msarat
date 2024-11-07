@@ -3,66 +3,10 @@ import axios from "axios";
 
 interface BootResponse {
     chat_id: string;
-    messages: {id:string , sender_type:"system" , content:string}[];
+    messages: {id:string , sender_type:"system" , content:Content}[];
 }
 
-// interface Question {
-//     id: string;
-//     lesson: string;
-//     topic: string;
-//     learning_phase: LearningPhase;
-//     blooms_level: BloomsLevel;
-//     learning_type: LearningType;
-//     question_text: string;
-//     question_type: QuestionType;
-//     difficulty: Difficulty;
-//     created_at: string;
-//     updated_at: string;
-//     cause: string | null;
-//     question_location_in_video: string | null;
-//     true_false_question?: TrueFalseQuestion;
-//     long_answer_question?: LongAnswerQuestion;
-//     sorting_question?: SortingQuestion;
-//     mcq_question?: MultipleChoiceQuestion;
-//     audio_base64: string;
-//     combined_audio_base64?: string;
-// }
-
-// type LearningPhase = "INTRO_EXAM" | string;
-// type BloomsLevel = "UNDERSTAND" | "EVALUATE" | "ANALYZE" | "REMEMBER" | string;
-// type LearningType = "Visual" | string;
-// type QuestionType = "TRUE_FALSE" | "LONG_ANSWER" | "SORTING" | "MULTIPLE_CHOICE" | string;
-// type Difficulty = "BEGINNER" | "INTERMEDIATE" | "ADVANCED" | string;
-
-// interface TrueFalseQuestion {
-//     id: string;
-//     correct_answer: boolean;
-//     question: string;
-// }
-
-// interface LongAnswerQuestion {
-//     id: string;
-//     correct_answer: string;
-//     question: string;
-// }
-
-// interface SortingQuestion {
-//     id: string;
-//     correct_order: string[];
-//     question: string;
-// }
-
-// interface MultipleChoiceQuestion {
-//     id: string;
-//     choices: Choice[];
-//     correct_answer: string;
-//     question: string;
-// }
-
-// interface Choice {
-//     [key: string]: string;
-// }
-
+type Content = { id?: string; question_text?: string; student_answer?:string };
 
 
 
