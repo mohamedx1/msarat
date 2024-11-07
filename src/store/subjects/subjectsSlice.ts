@@ -5,11 +5,12 @@ import getSubjects from "./act/actAllSubjects"
 
 
 interface SubjectState {
-  subjects: {id:string , code:string , description:string , name:string ,   is_active:boolean ,  progress:number ,  academic_year:string  }[]; //
+  subjects: {id:string , code:string , description:string , name:string ,   is_active:boolean ,  progress_percentage:number ,  academic_year:string , lessons:Lessons  }[]; //
   isLoading: 'idle' | 'pending' | 'succeeded' | 'failed'
   error: string | null;
 }
 
+type Lessons = { id: string, description: string, title: string, status: string, subject: string, order: string , is_active:boolean }[]
 
 
 const initialState: SubjectState = {

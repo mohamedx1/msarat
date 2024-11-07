@@ -7,10 +7,12 @@ import getRestoreChat from './act/actChatting';
 
 interface BootResponse {
     chat_id: string;
-    messages: {id:string , sender_type:"system" , content:string}[];
+    messages: {id:string , sender_type:"system" , content:Content}[];
     isLoading: 'idle' | 'pending' | 'succeeded' | 'failed';
     error: string | null;
 }
+
+type Content = { id?: string; question_text?: string; student_answer?:string };
 
 // interface Question {
 //     id: string;
@@ -80,12 +82,14 @@ const initialState: BootResponse = {
         {
             id: "",
             sender_type: "system",
-            content: ""
+            content: {}
         }
     ],
     isLoading: 'idle' ,
     error: null,
 };
+
+
 
 const restoreMainChatSlice = createSlice({
   name: "restoreMainChat",

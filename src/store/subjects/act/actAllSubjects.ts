@@ -3,14 +3,15 @@ import axios from "axios";
 
 
 
-type respose = {id:string , code:string , description:string , name:string ,    is_active:boolean , progress:number ,   academic_year:string    }[]
+type respose = {id:string , code:string , description:string , name:string ,    is_active:boolean , progress_percentage:number ,   academic_year:string    }[]
 const getSubjects = createAsyncThunk("subjects/getSubjects", async (token:string, thunkAPI) => {
 
   const { rejectWithValue } = thunkAPI
   try {
     console.log(`${token} this form act Sub`)
-        const response = await axios.get<any>("https://localhost:8000/cms/subjects_with_lessons" , {headers:{
-        Authorization: `Bearer ${token}`,
+        const response = await axios.get<any>("http://localhost:8000/cms/subjects_with_lessons" , {headers:{
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json"
       },
         });
 

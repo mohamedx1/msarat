@@ -6,6 +6,7 @@ interface IProps {
   status: string;
   subject: string;
   order: string;
+  is_active: boolean;
 }
 export default function Lessons({
   id,
@@ -14,19 +15,20 @@ export default function Lessons({
   status,
   subject,
   order,
+  is_active,
 }: IProps) {
   return (
     <>
       <>
         <section className='mt-2.5 flex justify-between p-2 rounded-lg'>
           <p className='text-text-sm font-regular my-auto'>
-            {order + " : " + title}
+            {description + "  :  " + title}
           </p>
-          {status === "notStarted" ? (
+          {is_active === false ? (
             <span className='inline-flex items-center rounded-lg bg-gray-500 px-2 py-1 font-medium   text-white text-text-sm'>
               لم يبدأ
             </span>
-          ) : status === "started" ? (
+          ) : is_active === true ? (
             <span className='inline-flex items-center rounded-md bg-primary-300 px-2 py-1 font-medium   text-white text-text-sm'>
               شرح
             </span>

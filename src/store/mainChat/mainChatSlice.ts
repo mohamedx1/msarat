@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import getMainChat from './act/actMainChat';
 
 
@@ -11,24 +11,26 @@ interface BootResponse {
 }
 
 interface Question {
-    id: string;
-    lesson: string;
-    topic: string;
-    learning_phase: LearningPhase;
-    blooms_level: BloomsLevel;
-    learning_type: LearningType;
-    question_text: string;
-    question_type: QuestionType;
-    difficulty: Difficulty;
-    created_at: string;
-    updated_at: string;
-    cause: string | null;
-    question_location_in_video: string | null;
+    id?: string;
+    lesson?: string;
+    topic?: string;
+    learning_phase?: LearningPhase;
+    blooms_level?: BloomsLevel;
+    learning_type?: LearningType;
+    question_text?: string;
+    content_type?: string;
+    video_contents?:{url:string}
+    question_type?: QuestionType;
+    difficulty?: Difficulty;
+    created_at?: string;
+    updated_at?: string;
+    cause?: string | null;
+    question_location_in_video?: string | null;
     true_false_question?: TrueFalseQuestion;
     long_answer_question?: LongAnswerQuestion;
     sorting_question?: SortingQuestion;
     mcq_question?: MultipleChoiceQuestion;
-    audio_base64: string;
+    audio_base64?: string;
     combined_audio_base64?: string;
 }
 
@@ -77,24 +79,28 @@ const initialState: BootResponse = {
     content: [
         {
             id: "",
-            lesson: "",
-            topic: "",
-            learning_phase: "",
-            blooms_level: "",
-            learning_type: "",
-            question_text: "",
-            question_type: "",
-            difficulty: "",
-            created_at: "",
-            updated_at: "",
-            cause: null,
-            question_location_in_video: null,
-            true_false_question: {
-                id: "",
-                correct_answer: true,
-                question: ""
-            },
-            audio_base64: ""
+    lesson: "",
+    topic: "",
+    learning_phase: "",
+    blooms_level: "",
+    learning_type: "",
+    question_text: "",
+    content_type: "",
+            video_contents: { url: "" },
+    question_type: "",
+    difficulty: "",
+    created_at: "",
+    updated_at: "",
+    question_location_in_video: "" ,
+    true_false_question: {correct_answer:false , id:"", question:""},
+    long_answer_question: {correct_answer:"" , id:"", question:""},
+    sorting_question: {correct_order:[""] , id:"", question:""},
+    mcq_question: {correct_answer:"" , id:"", question:"" , choices: [
+                    {
+                        "": "Berlin"
+                    },]},
+    audio_base64: "",
+    combined_audio_base64: "",
         }
         // Add more question objects as needed
     ],

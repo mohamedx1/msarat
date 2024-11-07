@@ -7,8 +7,8 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import BootResponse from "./BootResponse";
 import getRestoreChat from "./../../../../store/restoreMainChatt/act/actChatting";
 
-type Message = { id: string; sender_type: "system" | "user"; content: string };
-
+type Message = { id: string; sender_type: "system" | "user"; content: Content };
+type Content = { id?: string; question_text?: string; student_answer?: string };
 export default function ChatComponent() {
   const dispatch = useAppDispatch();
   const {
@@ -51,7 +51,7 @@ export default function ChatComponent() {
     const newMessage: Message = {
       id: (allMessages.length + 1).toString(),
       sender_type: "user",
-      content: inputMessage,
+      content: { student_answer: inputMessage },
     };
 
     setAllMessages([...allMessages, newMessage]);
@@ -62,12 +62,12 @@ export default function ChatComponent() {
       const botResponse: Message = {
         id: (allMessages.length + 2).toString(),
         sender_type: "system",
-        content:
-          "كان وأخواتها أفعال ناسخة ناقصة تدخُلُ على الجملة الاسمية، فيُسمَّى المبتدأ اسمها ويبقى مرفوعًا، ويُسمَّى الخبرُ خبرها ويصير منصوبًا وأخوات (كان) هي (أصبح)، و(أضحى)، و(أمسى)، و(بات)، و(صار)، و(ظلَّ)، و(ليس)، و(ما دام)، و(ما بَرِحَ)، و(ما فَتِئَ)، و(ما انفكَّ)، و(ما زال، من الفعل زال يزال، وليس زال يزول).",
+        content: { question_text: "The earth is flat." },
       };
       setAllMessages((prevMessages) => [...prevMessages, botResponse]);
     }, 500);
   };
+  console.log(allMessages);
 
   return (
     <div className={`flex flex-col rounded-lg shadow-md h-screen`}>
@@ -90,7 +90,7 @@ export default function ChatComponent() {
                   <div
                     className={`max-w-xs md:max-w-md px-4 py-2 rounded-l bg-transparent text-gray-800 m-auto`}
                   >
-                    <BootResponse content={msg.content} />
+                    {msg.content.question_text}
                   </div>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export default function ChatComponent() {
                     : "bg-transparent text-gray-800"
                 }`}
               >
-                {msg.content}
+                {msg.content.student_answer}
               </div>
             )}
           </div>

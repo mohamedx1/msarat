@@ -36,7 +36,7 @@ interface MultipleChoiceQuestion {
 interface Choice {
   [key: string]: string;
 }
-export default function BootResponse({ content }: { content: any }) {
+export default function BootResponse({ message }: { message: any }) {
   // const jsonString = content
   //   .replace(/'/g, '"') // Convert single quotes to double quotes
   //   .replace(/\bNone\b/g, "null") // Replace None with null
@@ -45,7 +45,8 @@ export default function BootResponse({ content }: { content: any }) {
 
   //   console.log(JSON.parse(jsonString));
   //   const jsonData = JSON.parse(jsonString);
-  return <div>{content[0]}</div>;
+  console.log(message)
+  return <div>{message}</div>;
 }
 
 // {
